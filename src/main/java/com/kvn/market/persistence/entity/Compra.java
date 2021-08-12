@@ -1,5 +1,6 @@
 package com.kvn.market.persistence.entity;
 
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public class Compra {
 
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compra")
     private Integer idCompra;
 
@@ -22,17 +23,15 @@ public class Compra {
     private String medioPago;
 
     private String comentario;
-
     private String estado;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "compra", cascade = {CascadeType.ALL})
     private List<ComprasProducto> productos;
 
-    //METHODS
     public Integer getIdCompra() {
         return idCompra;
     }
@@ -79,5 +78,21 @@ public class Compra {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ComprasProducto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ComprasProducto> productos) {
+        this.productos = productos;
     }
 }
