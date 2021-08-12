@@ -41,6 +41,7 @@ public class ProductController {
             .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @GetMapping("/category/{id}")
     public ResponseEntity<List<Product>> getByCategoria(@PathVariable("id") int categoryId){
         return this.productService.getByCategory(categoryId)
